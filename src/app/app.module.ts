@@ -1,6 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+CommonModule
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 //ROUTES
 import { APP_ROUTER } from './app.routes';
@@ -24,9 +28,12 @@ import { RegisterComponent } from './login/register.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     PagesModule,
     BrowserAnimationsModule, // required animations module
     ToastrModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
     APP_ROUTER
   ],
   providers: [],
