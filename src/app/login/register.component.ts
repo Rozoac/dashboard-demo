@@ -1,7 +1,9 @@
-import { UsuarioService } from '../services/usuario/usuario.service';
+import { UsuarioService } from "../services/usuario/usuario.service";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
-import { Usuario } from '../../models/usuario.model';
+import { Usuario } from "../../models/usuario.model";
+import swal from "sweetalert2";
+import { Router } from '@angular/router';
 
 @Component({
   selector: "app-register",
@@ -10,14 +12,10 @@ import { Usuario } from '../../models/usuario.model';
 })
 export class RegisterComponent implements OnInit {
   formulario: FormGroup;
+  recuerdame: boolean = false;
 
-  cesitar:any;
-
-  constructor(public _servicioUsuario: UsuarioService) {
-
-    this._servicioUsuario.getUsuarios().subscribe((res:any)=>{
-      this.cesitar = res;
-    })
+  constructor(public _servicioUsuario: UsuarioService, public router: Router) {
+   
   }
 
   ngOnInit() {
@@ -50,10 +48,13 @@ export class RegisterComponent implements OnInit {
     if (this.formulario.invalid) {
       return;
     }
-
     if (!this.formulario.value.condiciones) {
-      console.log("debe aceptar las condiciones");
-      return;
+     return  swal({
+        title: "Error!",
+        text: "Debes aceptar las condiciones",
+        type: "error",
+        confirmButtonText: "ok"
+      });
     }
 
     let usuario = new Usuario(
@@ -62,9 +63,11 @@ export class RegisterComponent implements OnInit {
       this.formulario.value.password
     );
 
-    this._servicioUsuario.crearUsuario(usuario).subscribe((res:any) =>{
-      console.log(res);
-    });
-    
+    this._servicioUsuario.crearUsuario(usuario).subscribe((res: any) => {
+      
+        
+        this.router.navigate(['/login']);
+        console.log(res);
+      })
   }
 }

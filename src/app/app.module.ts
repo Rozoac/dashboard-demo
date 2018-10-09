@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-CommonModule
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -14,6 +13,7 @@ import { PagesModule } from './pages/pages.module';
 
 // LIBRERIAS EXTERNOS
 import { ToastrModule } from 'ngx-toastr';
+import { SweetAlert2Module } from "@toverux/ngx-sweetalert2";
 
 //COMPONENTES
 import { AppComponent } from './app.component';
@@ -27,6 +27,7 @@ import { RegisterComponent } from './login/register.component';
     RegisterComponent
   ],
   imports: [
+    SweetAlert2Module.forRoot(),
     BrowserModule,
     HttpClientModule,
     PagesModule,
